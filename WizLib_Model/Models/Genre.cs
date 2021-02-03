@@ -2,7 +2,7 @@
 
 namespace WizLib_Model.Models
 {
-    public class Category
+    public class Genre
     {
         // [Key]  superfluous if field name is Id
         public int Id { get; set; }
