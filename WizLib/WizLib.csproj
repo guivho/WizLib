@@ -9,4 +9,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WizLib_DataAccess\WizLib_DataAccess.csproj" />
+    <ProjectReference Include="..\WizLib_Model\WizLib_Model.csproj" />
+  </ItemGroup>
+
 </Project>
