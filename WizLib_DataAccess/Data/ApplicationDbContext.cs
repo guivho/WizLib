@@ -14,5 +14,15 @@ namespace WizLib_DataAccess.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+
+        //no longer needed to create the special composite table
+        public DbSet<BookAuthor> BookAuthors { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //configure fluent API
+            //composite key
+            modelBuilder.Entity<BookAuthor>().HasKey(ba => new { ba.AuthorId, ba.BookId });
+        }
     }
 }

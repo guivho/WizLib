@@ -31,5 +31,10 @@ namespace WizLib_Model.Models
         [ForeignKey("PublisherId")]
         public int PublisherId { get; set; }
         public Publisher Publisher { get; set; }
+
+        //this is the current way to do many to many
+        //public ICollection<Author> Authors { get; set; }
+        
+        public ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }

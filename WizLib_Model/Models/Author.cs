@@ -27,5 +27,10 @@ namespace WizLib_Model.Models
             }
         }
 
+        //this is the current way to do many to many
+        //public ICollection<Book> Books { get; set; }
+
+        public ICollection<BookAuthor> BookAuthors { get; set; }
+
     }
 }
