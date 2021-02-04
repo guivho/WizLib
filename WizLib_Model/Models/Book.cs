@@ -17,8 +17,15 @@ namespace WizLib_Model.Models
         public string  ISBN { get; set; }
         [Required]
         public double Price { get; set; }
-        
-        [NotMapped]
-        public string PriceRange { get; set; }
+
+        //default way to add the relation using the default foreign key CategoryId
+        //while that is the name of the primary index in Categories
+        //public Category Category { get; set; }
+
+        //this way does exactly the same, but mentions the extra column
+        //explicitely, making it more visible 
+        [ForeignKey("CategoryId")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
