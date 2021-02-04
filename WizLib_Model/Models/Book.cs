@@ -24,8 +24,8 @@ namespace WizLib_Model.Models
 
         //this way does exactly the same, but mentions the extra column
         //explicitely, making it more visible 
-        [ForeignKey("CategoryId")]
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        [ForeignKey("BookDetailId")]
+        public int BookDetailId { get; set; }
+        public BookDetail BookDetail { get; set; }
     }
 }
