@@ -10,5 +10,8 @@ namespace WizLib_Model.Models
 
         public int AuthorId { get; set; }
 
+        public Fluent_Author Fluent_Author { get; set; }
+        public Fluent_Book Fluent_Book { get; set; }
+
     }
 }

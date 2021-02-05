@@ -55,8 +55,14 @@ namespace WizLib_DataAccess.Data
                 .HasOne(p => p.Fluent_Publisher).WithMany(b => b.Fluent_Books)
                 .HasForeignKey(k => k.PublisherId);
 
-            ////Fluent_BookAuthor
-            //modelBuilder.Entity<Fluent_BookAuthor>().HasKey(ba => new { ba.AuthorId, ba.BookId });
+            //Fluent_BookAuthor
+            modelBuilder.Entity<Fluent_BookAuthor>().HasKey(ba => new { ba.AuthorId, ba.BookId });
+            modelBuilder.Entity<Fluent_BookAuthor>()
+                .HasOne(b => b.Fluent_Book).WithMany(ba => ba.Fluent_BookAuthor)
+                .HasForeignKey(k => k.BookId);
+            modelBuilder.Entity<Fluent_BookAuthor>()
+                .HasOne(a => a.Fluent_Author).WithMany(ba => ba.Fluent_BookAuthor)
+                .HasForeignKey(k => k.AuthorId);
 
             //Fluent_BookDetails
             modelBuilder.Entity<Fluent_BookDetail>().HasKey(bd => bd.BookDetailId);
