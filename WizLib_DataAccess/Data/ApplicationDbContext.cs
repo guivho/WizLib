@@ -18,7 +18,11 @@ namespace WizLib_DataAccess.Data
 
         //no longer needed to create the special composite table
         public DbSet<BookAuthor> BookAuthors { get; set; }
+        
+        public DbSet<Fluent_Author> Fluent_Authors { get; set; }
+        public DbSet<Fluent_Book> Fluent_Books { get; set; }
         public DbSet<Fluent_BookDetail> Fluent_BookDetails { get; set; }
+        public DbSet<Fluent_Publisher> Fluent_Publishers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,16 +30,17 @@ namespace WizLib_DataAccess.Data
             //composite key
             modelBuilder.Entity<BookAuthor>().HasKey(ba => new { ba.AuthorId, ba.BookId });
 
-            ////Fluent_Author
-            //modelBuilder.Entity<Fluent_Author>().HasKey(bd => bd.AuthorId);
-            //modelBuilder.Entity<Fluent_Author>().Property(bd => bd.FirstName).IsRequired();
-            //modelBuilder.Entity<Fluent_Author>().Property(bd => bd.LastName).IsRequired();
+            //Fluent_Author
+            modelBuilder.Entity<Fluent_Author>().HasKey(a => a.AuthorId);
+            modelBuilder.Entity<Fluent_Author>().Property(a => a.FirstName).IsRequired();
+            modelBuilder.Entity<Fluent_Author>().Property(a => a.LastName).IsRequired();
+            modelBuilder.Entity<Fluent_Author>().Ignore(a => a.FullName);
 
-            ////Fluent_Book   
-            //modelBuilder.Entity<Fluent_Book>().HasKey(bk => bk.BookId);
-            //modelBuilder.Entity<Fluent_Book>().Property(bk => bk.Title).IsRequired();
-            //modelBuilder.Entity<Fluent_Book>().Property(bk => bk.ISBN).IsRequired();
-            //modelBuilder.Entity<Fluent_Book>().Property(bk => bk.Price).IsRequired();
+            //Fluent_Book   
+            modelBuilder.Entity<Fluent_Book>().HasKey(bk => bk.BookId);
+            modelBuilder.Entity<Fluent_Book>().Property(bk => bk.Title).IsRequired();
+            modelBuilder.Entity<Fluent_Book>().Property(bk => bk.ISBN).IsRequired().HasMaxLength(15);
+            modelBuilder.Entity<Fluent_Book>().Property(bk => bk.Price).IsRequired();
 
             ////Fluent_BookAuthor
             //modelBuilder.Entity<Fluent_BookAuthor>().HasKey(ba => new { ba.AuthorId, ba.BookId });
@@ -44,10 +49,10 @@ namespace WizLib_DataAccess.Data
             modelBuilder.Entity<Fluent_BookDetail>().HasKey(bd => bd.BookDetailId);
             modelBuilder.Entity<Fluent_BookDetail>().Property(bd => bd.NumberOfChapters).IsRequired();
 
-            ////Fluent_Publisher
-            //modelBuilder.Entity<Fluent_Publisher>().HasKey(p => p.PublisherId);
-            //modelBuilder.Entity<Fluent_Publisher>().Property(p => p.PublisherName).IsRequired();
-            //modelBuilder.Entity<Fluent_Publisher>().Property(p => p.Location).IsRequired();
+            //Fluent_Publisher
+            modelBuilder.Entity<Fluent_Publisher>().HasKey(p => p.PublisherId);
+            modelBuilder.Entity<Fluent_Publisher>().Property(p => p.PublisherName).IsRequired();
+            modelBuilder.Entity<Fluent_Publisher>().Property(p => p.Location).IsRequired();
 
         }
     }
