@@ -9,7 +9,7 @@ namespace WizLib_Model.Models
     public class Book
     {
         [Key]
-        public int Book_Id { get; set; }
+        public int BookId { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
