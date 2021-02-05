@@ -7,5 +7,7 @@
         public string  ISBN { get; set; }
         public double Price { get; set; }
 
+        public int BookDetailId { get; set; }
+        public Fluent_BookDetail Fluent_BookDetail { get; set; }
     }
 }
