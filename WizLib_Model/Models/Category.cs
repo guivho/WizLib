@@ -4,8 +4,8 @@ namespace WizLib_Model.Models
 {
     public class Category
     {
-        public int CategoryId { get; set; }
-        [Required]
+        [Key]
+        public int Category_Id { get; set; }
         public string Name { get; set; }
     }
 }
