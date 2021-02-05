@@ -9,5 +9,8 @@
 
         public int BookDetailId { get; set; }
         public Fluent_BookDetail Fluent_BookDetail { get; set; }
+
+        public int PublisherId { get; set; }
+        public Fluent_Publisher Fluent_Publisher { get; set; }
     }
 }

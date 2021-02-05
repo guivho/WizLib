@@ -13,5 +13,6 @@ namespace WizLib_Model.Models
     
         public string Location { get; set; }
 
+        public ICollection<Fluent_Book> Fluent_Books { get; set; }
     }
 }
