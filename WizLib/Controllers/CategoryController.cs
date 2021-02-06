@@ -68,5 +68,34 @@ namespace WizLib.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+
+        public IActionResult CreateMultiple5()
+        {
+            return CreateMultiple(5);
+        }
+
+        public IActionResult CreateMultiple2()
+        {
+            return CreateMultiple(2);
+        }
+
+        public IActionResult CreateMultiple(int nr)
+        {
+            //for (int i = 0; i < nr; i++)
+            //{
+            //    _db.Categories.Add(new Category { Name = Guid.NewGuid().ToString() });
+            //}
+            //_db.SaveChanges();
+            //return RedirectToAction(nameof(Index));
+            var list = new List<Category>();
+            for (int i = 0; i < nr; i++)
+            {
+                list.Add(new Category { Name = Guid.NewGuid().ToString() });
+            }
+            _db.AddRange(list);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
