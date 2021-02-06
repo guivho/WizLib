@@ -88,12 +88,32 @@ namespace WizLib.Controllers
             //}
             //_db.SaveChanges();
             //return RedirectToAction(nameof(Index));
-            var list = new List<Category>();
+            var categoryList = new List<Category>();
             for (int i = 0; i < nr; i++)
             {
-                list.Add(new Category { Name = Guid.NewGuid().ToString() });
+                categoryList.Add(new Category { Name = Guid.NewGuid().ToString() });
             }
-            _db.AddRange(list);
+            _db.AddRange(categoryList);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult RemoveMultiple5()
+        {
+            return RemoveMultiple(5);
+        }
+
+        public IActionResult RemoveMultiple2()
+        {
+            return RemoveMultiple(2);
+        }
+
+        public IActionResult RemoveMultiple(int nr)
+        {
+            IEnumerable<Category> categoryList =
+                _db.Categories.OrderByDescending(u => u.Category_Id).Take(nr).ToList();
+
+            _db.RemoveRange(categoryList);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
