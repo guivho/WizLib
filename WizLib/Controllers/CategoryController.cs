@@ -56,5 +56,17 @@ namespace WizLib.Controllers
             }
             return View(category);
         }
+
+
+        public IActionResult Delete(int id)
+        {
+            var category = _db.Categories.FirstOrDefault(c => c.Category_Id == id);
+            if (category != null)
+            {
+                _db.Categories.Remove(category);
+                _db.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
