@@ -22,6 +22,7 @@ namespace WizLib.Controllers
             return View(categoryList);
         }
 
+
         public IActionResult Upsert(int? id)
         {
             var category = new Category();
@@ -36,17 +37,24 @@ namespace WizLib.Controllers
             return View(category);
         }
 
-        public IActionResult Update(Category category)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Category category)
         {
-            if (category.Category_Id > 0)
+            if (ModelState.IsValid)
             {
-                _db.Categories.Update(category);
+                if (category.Category_Id > 0)
+                {
+                    _db.Categories.Update(category);
+                }
+                else
+                {
+                    _db.Categories.Add(category);
+                }
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                _db.Categories.Add(category);
-            }
-            return NotFound();
+            return View(category);
         }
     }
 }
