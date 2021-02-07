@@ -48,22 +48,22 @@ namespace WizLib.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Book book)
+        public IActionResult Upsert(BookVM bookVM)
         {
-            if (ModelState.IsValid)
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(bookVM);
+            //}
+            if (bookVM.Book.BookId > 0)
             {
-                if (book.BookId > 0)
-                {
-                    _db.Books.Update(book);
-                }
-                else
-                {
-                    _db.Books.Add(book);
-                }
-                _db.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                _db.Books.Update(bookVM.Book);
             }
-            return View(book);
+            else
+            {
+                _db.Books.Add(bookVM.Book);
+            }
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
 
