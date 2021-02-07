@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WizLib_DataAccess.Data;
 using WizLib_Model.Models;
+using WizLib_Model.ViewModel;
 
 namespace WizLib.Controllers
 {
@@ -25,16 +27,23 @@ namespace WizLib.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            var book = new Book();
+            var bookVM = new BookVM
+            {
+                PublisherList = _db.Publishers.Select(i => new SelectListItem
+                {
+                    Text = i.PublisherName,
+                    Value = i.PublisherId.ToString()
+                })
+            };
             if (id != null)
             {
-                book = _db.Books.FirstOrDefault(c => c.BookId == id);
-                if (book == null)
+                bookVM.Book = _db.Books.FirstOrDefault(c => c.BookId == id);
+                if (bookVM == null)
                 {
                     return NotFound();
                 }
             }
-            return View(book);
+            return View(bookVM);
         }
 
         [HttpPost]
